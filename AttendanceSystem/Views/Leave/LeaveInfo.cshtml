@@ -1,0 +1,73 @@
+﻿@model List<AttendanceSystem.Models.EmployeeLeave>
+@{
+    ViewBag.Title = "LeaveInfo";
+}
+
+<h2>LeaveInfo</h2>
+@using (Html.BeginForm())
+{
+
+    <div class="editor-label">
+        <label>
+            Select Employee
+        </label>
+    </div>
+    <div class="editor-field">
+        @Html.DropDownList("EmployeeId", String.Empty)
+    </div>
+
+    <p>
+        <input type="submit" value="show leave history" />
+    </p>
+}
+
+@if (Model != null && Model.Count > 0)
+{
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>
+                Leave Type
+            </th>
+            <th>
+                From
+            </th>
+            <th>
+                To
+            </th>
+            <th>
+                Number Of Days
+            </th>
+            <th>
+                Reason
+            </th>
+        </tr>
+
+
+
+
+        @foreach (var el in Model)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => el.LeaveType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => el.LeaveStartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => el.LeaveEndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => el.Duration)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => el.Reason)
+                </td>
+            </tr>
+
+        }
+    </table>
+}
+
+

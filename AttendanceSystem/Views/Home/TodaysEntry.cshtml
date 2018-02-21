@@ -1,0 +1,30 @@
+﻿@model List<AttendanceSystem.Models.Attendance>
+@{
+    ViewBag.Title = "Home Page";
+}
+<h2>Today's Entry</h2>
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Entry Time</th>
+    </tr>
+    @foreach (var attendance in Model)
+    {
+        <tr>
+            <td>@attendance.Name</td>
+            <td>@attendance.FirstEntryTime.ToLongTimeString()</td>
+            @if (TimeSpan.Compare(attendance.FirstEntryTime.TimeOfDay, TimeSpan.Parse(attendance.Shift.GraceEntryTime).Add(TimeSpan.FromMinutes(1))) == 1)
+            {
+                <td class="red">Late Entry</td>
+            }
+            else
+            {
+                <td>On Time</td>
+            }
+        </tr>
+
+    }
+
+
+</table>

@@ -1,0 +1,183 @@
+﻿@model AttendanceSystem.Models.Employee
+
+@using System.Web.Mvc.Html
+@using AttendanceSystem.Models
+
+@{
+    ViewBag.Title = "Edit Employee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    $(document).ready(function () {
+        $("#datepicker").datepicker();
+        $("#datepicker2").datepicker();
+    });
+</script>
+<h2>Edit Employee</h2>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("Edit", "Employee"))
+        {
+            @Html.HiddenFor(model => model.Id)
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Name</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="Name" required="" value="@Model.Name" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Designation</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="Designation" required="" value="@Model.Designation">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Joining Date</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="JoiningDate" value="@Model.JoiningDate.ToShortDateString()" id="datepicker">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Reference Id</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="ReferenceId" value="@Model.ReferenceId">
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Contact Address</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="ContactAddress" value="@Model.ContactAddress">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Father's Name</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="FathersName" value="@Model.FathersName">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Date of Birth</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="DateofBirth" value="@Model.DateofBirth.ToShortDateString()" id="datepicker">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Section</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="Section" value="@Model.Section">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Grade</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="Grade" value="@Model.Grade">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Category</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="Category" value="@Model.Category">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>GrossSalary</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="GrossSalary" value="@Model.GrossSalary">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Shift</label>
+                </div>
+                <div class="col-md-4">
+                    <select name="ShiftId" class="form-control">
+                        @foreach (var shift in ViewBag.Shifts)
+                        {
+                            if (shift.Id == @Model.ShiftId)
+                            {
+                                <option value="@shift.Id" selected="selected">@shift.Name</option>
+                            }
+                            else
+                            {
+                                <option value="@shift.Id">@shift.Name</option>
+                            }
+
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Department</label>
+                </div>
+                <div class="col-md-4">
+                    <select name="DeptId" class="form-control">
+                        @foreach (var dept in ViewBag.Dept)
+                        {
+                            if (dept.Id == @Model.DeptId)
+                            {
+                                <option value="@dept.Id" selected="selected">@dept.Name</option>
+                            }
+                            else
+                            {
+                                <option value="@dept.Id">@dept.Name</option>
+                            }
+
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Branch</label>
+                </div>
+                <div class="col-md-4">
+                    <select name="BranchId" class="form-control">
+                        @foreach (var branch in ViewBag.Branch)
+                        {
+                            if (branch.Id == @Model.BranchId)
+                            {
+                                <option value="@branch.Id" selected="selected">@branch.Name</option>
+                            }
+                            else
+                            {
+                                <option value="@branch.Id">@branch.Name</option>
+                            }
+
+                        }
+                    </select>
+                </div>
+            </div>
+            <input class="btn btn-success" type="submit" value="Submit">
+            <a class="btn btn-info" href="/Employee/Index">Cancel</a>
+        }
+
+
+
+    </div>
+</div>

@@ -1,0 +1,159 @@
+﻿@using System.Web.Mvc.Html
+@using AttendanceSystem.Models
+@model System.Collections.Generic.List<AttendanceSystem.Models.Shift>
+
+@{
+    ViewBag.Title = "Create Employee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    $(document).ready(function () {
+        $("#datepicker").datepicker();
+        $("#datepicker2").datepicker();
+    });
+</script>
+<h2>Create Employee</h2>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("Create", "Employee"))
+        {
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Name</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="Name" required="">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Designation</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="Designation" required="">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Joining Date</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="JoiningDate" id="datepicker">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Reference Id</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="ReferenceId">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Contact Address</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="ContactAddress">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Father's Name</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="FathersName">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Date of Birth</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="DateofBirth" id="datepicker2">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Section</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="Section">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Grade</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="Grade">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Category</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="Category">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>GrossSalary</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="GrossSalary">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Shift</label>
+                </div>
+                <div class="col-md-4">
+                    <select name="ShiftId" class="form-control">
+                        @foreach (var shift in Model)
+                        {
+                            <option value="@shift.Id">@shift.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Department</label>
+                </div>
+                <div class="col-md-4">
+                    <select name="DeptId" class="form-control">
+                        @foreach (var dept in ViewBag.Dept)
+                        {
+                            <option value="@dept.Id">@dept.Name</option>
+
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Branch</label>
+                </div>
+                <div class="col-md-4">
+                    <select name="BranchId" class="form-control">
+                        @foreach (var branch in ViewBag.Branch)
+                        {
+                            <option value="@branch.Id">@branch.Name</option>
+
+                        }
+                    </select>
+                </div>
+            </div>
+            <input class="btn btn-success" type="submit" value="Submit">
+            <a class="btn btn-info" href="/Employee/Index">Cancel</a>
+        }
+    </div>
+</div>

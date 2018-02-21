@@ -1,0 +1,102 @@
+﻿@using AttendanceSystem.Models
+@model List<AttendanceSystem.Models.AttendanceSummary>
+
+@{
+    ViewBag.Title = "Summery";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var employees = ViewBag.Employees as List<Employee>;
+}
+
+<script>
+    $(document).ready(function () {
+        $("#fromdatepicker").datepicker();
+        $("#todatepicker").datepicker();
+    });
+</script>
+<h2>Attendance</h2>
+<form action="/Summary/Index" method="GET">
+    <div class="row">
+        <div class="col-md-2">
+            <label>Branch</label>
+        </div>
+        <div class="col-md-4">
+            <select name="branchId" class="form-control">
+                <option value="0">All</option>
+                @foreach (var branch in ViewBag.Branches)
+                {
+                    <option value="@branch.Id">@branch.Name</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <label>Department</label>
+        </div>
+        <div class="col-md-4">
+            <select name="deptId" class="form-control">
+                <option value="0">All</option>
+                @foreach (var dept in ViewBag.Departments)
+                {
+                    <option value="@dept.Id">@dept.Name</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <label>Shift</label>
+        </div>
+        <div class="col-md-4">
+            <select name="shiftId" class="form-control">
+                <option value="0">All</option>
+                @foreach (var shift in ViewBag.Shifts)
+                {
+                    <option value="@shift.Id">@shift.Name</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <label>Date Range</label>
+        </div>
+        <div class="col-md-2">
+            <input class="form-control" type="text" name="from" id="fromdatepicker">
+        </div>
+        <div class="col-md-2">
+            <input class="form-control" type="text" name="to" id="todatepicker">
+        </div>
+    </div>
+    <input class="btn btn-info" type="submit" value="Filter">
+</form>
+
+<table class="table table-bordered table-striped">
+    <tr>
+    <tr>
+        <th>Name</th>
+        <th>Total Days</th>
+        <th>Total Presents</th>
+        <th>Total Lates</th>
+        <th>Remaining Leave Info</th>
+    </tr>
+    @foreach (var attendance in Model)
+    {
+        <tr>
+            <td>@attendance.Name</td>
+            <td>@attendance.TotalDays</td>
+            <td>@attendance.TotalPresents</td>
+            <td>@attendance.TotalLates</td>
+            <td>
+                
+                Remaining Casual Leave: @attendance.ReamainingCasualLeave<br/>
+                Remaining Earn leave: @attendance.ReamainingEarnLeave<br/>
+                Remaining Sick leave: @attendance.ReamainingSickLeave
+            </td>
+    </tr>
+
+    }
+
+
+</table>
+

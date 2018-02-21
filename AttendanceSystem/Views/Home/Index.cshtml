@@ -1,0 +1,99 @@
+﻿@using AttendanceSystem.Models
+@model List<AttendanceSystem.Models.Attendance>
+
+@{
+    ViewBag.Title = "Attendance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var employees = ViewBag.Employees as List<Employee>;
+}
+<script>
+    $(document).ready(function () {
+        $("#fromdatepicker").datepicker();
+        $("#todatepicker").datepicker();
+    });
+</script>
+<h2>Attendance</h2>
+<form action="/Home/Index" method="GET">
+    <div class="row">
+        <div class="col-md-2">
+            <label>Employee</label>
+        </div>
+        @*<div class="col-md-4">
+            <select name="referenceId" class="form-control">
+                <option value="0">All</option>
+                @foreach (var employee in employees)
+                {
+                    <option value="@employee.ReferenceId">@employee.Name, B: @employee.Branch.Name, D: @employee.Department.Name, S: @employee.Shift.Name</option>
+                }
+            </select>
+        </div>*@
+        <div class="col-md-2">
+            <label>Date Range</label>
+        </div>
+        <div class="col-md-2">
+            <input class="form-control" type="text" name="from" id="fromdatepicker">
+        </div>
+        <div class="col-md-2">
+            <input class="form-control" type="text" name="to" id="todatepicker">
+        </div>
+    </div>
+    <input class="btn btn-info" type="submit" value="Filter">
+</form>
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Entry Time</th>
+        <th>Exit Time</th>
+        <th>Entry Status</th>
+        <th>Exit Status</th>
+        <th>Working Hour</th>
+    </tr>
+    @foreach (var attendance in Model)
+    {
+        <tr>
+            <td>@attendance.Name</td>
+            <td>@attendance.Date.ToShortDateString()</td>
+            <td>@attendance.FirstEntryTime.ToLongTimeString()</td>
+            <td>@attendance.LastExitTime.ToLongTimeString()</td>
+            @if (TimeSpan.Compare(attendance.FirstEntryTime.TimeOfDay,
+                TimeSpan.Parse(attendance.Shift.GraceEntryTime).Add(TimeSpan.FromMinutes(1))) == 1
+                )
+            {
+                <td class="red">Late Entry</td>
+            }
+            else if (TimeSpan.Compare(attendance.FirstEntryTime.TimeOfDay,
+                TimeSpan.Parse(attendance.Shift.ExpectedEntryTime).Subtract(TimeSpan.FromMinutes(30))) == -1
+                )
+            {
+                <td class="blue">Early Entry</td>
+            }
+            else
+            {
+                <td>On Time</td>
+            }
+            @if (TimeSpan.Compare(attendance.LastExitTime.TimeOfDay,
+                TimeSpan.Parse(attendance.Shift.ExpectedExitTime).Add(TimeSpan.FromHours(12)).Add(TimeSpan.FromMinutes(30))) == 1
+                )
+            {
+                <td class="blue">Late Out</td>
+            }
+            else if (TimeSpan.Compare(attendance.LastExitTime.TimeOfDay,
+                TimeSpan.Parse(attendance.Shift.ExpectedExitTime).Add(TimeSpan.FromHours(12)).Subtract(TimeSpan.FromMinutes(30))) == -1
+                )
+            {
+                <td class="red">Early Out</td>
+            }
+            else
+            {
+                <td>On Time</td>
+            }
+            <th>@attendance.LastExitTime.Subtract(attendance.FirstEntryTime)</th>
+        </tr>
+
+    }
+
+
+</table>
+

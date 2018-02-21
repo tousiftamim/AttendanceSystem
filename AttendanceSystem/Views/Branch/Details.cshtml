@@ -1,0 +1,21 @@
+﻿@model AttendanceSystem.Models.Branch
+
+@{
+    ViewBag.Title = "Branch Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Branch Details</h2>
+<br/>
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>Name</th>
+        <th>FullAddress</th>
+    </tr>
+    <tr>
+        <td>@Model.Name</td>
+        <td>@Model.FullAddress</td>
+    </tr>
+</table>
+<a class="btn btn-info" href="/Branch/Index">Go Back</a>

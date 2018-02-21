@@ -1,0 +1,73 @@
+﻿@model AttendanceSystem.Models.Employee
+
+@{
+    ViewBag.Title = "Employee Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Employee Details</h2>
+<br />
+<table class="table table-bordered table-striped">
+    <tr>
+        <td><b>Name</b></td>
+        <td>@Model.Name</td>
+    </tr>
+    <tr>
+        <td><b>Designation</b></td>
+        <td>@Model.Designation</td>
+    </tr>
+    <tr>
+        <td><b>Joining Date</b></td>
+        <td>@Model.JoiningDate.ToShortDateString()</td>
+    </tr>
+    <tr>
+        <td><b>Reference Id</b></td>
+        <td>@Model.ReferenceId</td>
+    </tr>
+    <tr>
+        <td><b>Shift</b></td>
+        <td>@Model.Shift.Name</td>
+    </tr>
+    <tr>
+        <td><b>Department</b></td>
+        <td>@Model.Department.Name</td>
+    </tr>
+    <tr>
+        <td><b>Branch</b></td>
+        <td>@Model.Branch.Name</td>
+    </tr>
+    <tr>
+        <td><b>Expected Entry Time</b></td>
+        <td>@Model.Shift.ExpectedEntryTime</td>
+    </tr>
+    <tr>
+        <td><b>Contact Address</b></td>
+        <td>@Model.ContactAddress</td>
+    </tr>
+    <tr>
+        <td><b>Father's Name</b></td>
+        <td>@Model.FathersName</td>
+    </tr>
+    <tr>
+        <td><b>Date of Birth</b></td>
+        <td>@Model.DateofBirth.ToShortDateString()</td>
+    </tr>
+    <tr>
+        <td><b>Section</b></td>
+        <td>@Model.Section</td>
+    </tr>
+    <tr>
+        <td><b>Grade</b></td>
+        <td>@Model.Grade</td>
+    </tr>
+    <tr>
+        <td><b>Category</b></td>
+        <td>@Model.Category</td>
+
+    </tr>
+    <tr>
+        <td><b>GrossSalary</b></td>
+        <td>@Model.GrossSalary</td>
+    </tr>
+</table>
+<a class="btn btn-info" href="/Employee/Index">Go Back</a>

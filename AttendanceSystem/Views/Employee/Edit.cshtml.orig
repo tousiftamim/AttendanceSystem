@@ -1,0 +1,87 @@
+﻿@model AttendanceSystem.Models.Employee
+
+@using System.Web.Mvc.Html
+@using AttendanceSystem.Models
+
+@{
+    ViewBag.Title = "Edit Employee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Employee</h2>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("Edit", "Employee"))
+{
+    @Html.HiddenFor(model => model.Id)
+<<<<<<< local
+    <label>Name</label>
+    <input class="form-control" type="text" name="Name" required="" value="@Model.Name"><br />
+    <label>Designation</label>
+    <input class="form-control" type="text" name="Designation" required="" value="@Model.Designation"><br />
+    <label>JoiningDate</label>
+    <input class="form-control" type="text" name="JoiningDate" value="@Model.JoiningDate"><br />
+
+    <label>Shift</label>
+    <select name="ShiftId" class="form-control">
+        @foreach (var shift in ViewBag.Shifts)
+        {
+            if (shift.Id == @Model.ShiftId)
+            {
+                <option value="@shift.Id" selected="selected">@shift.Name</option>
+            }
+            else
+            {
+                <option value="@shift.Id">@shift.Name</option>
+            }
+            
+        }
+    </select>
+=======
+    <div class="row">
+        <div class="col-md-2">
+            <label>Name</label>
+        </div>
+        <div class="col-md-4">
+            <input class="form-control" type="text" name="Name" required="" value="@Model.Name"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <label>Designation</label>
+        </div>
+        <div class="col-md-4">
+            <input class="form-control" type="text" name="Designation" required="" value="@Model.Designation">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <label>JoiningDate</label>
+        </div>
+        <div class="col-md-4">
+            <input class="form-control" type="text" name="JoiningDate" value="@Model.JoiningDate">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <label>Shift</label>
+        </div>
+        <div class="col-md-4">
+            <select name="ShiftId" class="form-control">
+                @foreach (var shift in ViewBag.Shifts)
+                {
+                    <option value="@shift.Id">@shift.Name</option>
+                }
+            </select>
+        </div>
+    </div>
+>>>>>>> other
+
+    <input class="btn btn-success" type="submit" value="Submit">
+}
+
+
+
+    </div>
+</div>

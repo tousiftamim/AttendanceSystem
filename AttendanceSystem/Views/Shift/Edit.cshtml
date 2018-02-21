@@ -1,0 +1,60 @@
+﻿@model AttendanceSystem.Models.Shift
+
+@using System.Web.Mvc.Html
+@using AttendanceSystem.Models
+
+@{
+    ViewBag.Title = "Shift Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Shift Edit</h2>
+<br />
+
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("Edit", "Shift"))
+        {
+            @Html.HiddenFor(model => model.Id)
+            
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Name</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="Name" required="" value="@Model.Name">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <label>ExpectedEntryTime</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="ExpectedEntryTime" value="@Model.ExpectedEntryTime">
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-2">
+                    <label>GraceEntryTime</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="GraceEntryTime" value="@Model.GraceEntryTime">
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-2">
+                    <label>ExpectedExitTime</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="ExpectedExitTime" value="@Model.ExpectedExitTime">
+                </div>
+            </div>
+
+            <input class="btn btn-success" type="submit" value="Submit">
+            <a class="btn btn-info" href="/Shift/Index">Cancel</a>
+        }
+    </div>
+</div>

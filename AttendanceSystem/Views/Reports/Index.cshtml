@@ -1,0 +1,99 @@
+﻿@using AttendanceSystem.Models
+@model dynamic
+
+@{
+    ViewBag.Title = "Attendance Reports";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var employees = ViewBag.Employees as List<Employee>;
+}
+
+<h2>Reports</h2>
+
+<script>
+    $(document).ready(function() {
+        $("#absentlistdatepicker").datepicker();
+        $("#absentlistdatepickerfrom").datepicker();
+        $("#absentlistdatepickerto").datepicker();
+        $("#absentlistdatepickerfromem").datepicker();
+        $("#absentlistdatepickertoem").datepicker();
+    });
+</script>
+<br/>
+<br/>
+<form action="/Reports/ExportEmployee" method="POST" >
+    <input class="btn btn-info" name="exportemployeelist" type="submit" value="Export Employee List">
+</form>
+<hr/>
+<form action="/Reports/Export" method="POST">
+    <div class="row">
+        <div class="col-md-2">
+            <label>Date</label>
+        </div>
+        <div class="col-md-2">
+            <input class="form-control" type="text" name="date" id="absentlistdatepicker" required="">
+        </div>
+    </div>
+    <input class="btn btn-info" name="exportabsentlist" type="submit" value="Export Absent List">
+    <input class="btn btn-info" name="exportattendancelist" type="submit" value="Export Attendance List">
+    @*<input class="btn btn-info" name="exportattendancesummary" type="submit" value="Export Attendance Summary">*@
+
+</form>
+<hr />
+<form action="/Reports/Export2" method="POST">
+    <div class="row">
+        <div class="col-md-2">
+            <label>From</label>
+        </div>
+        <div class="col-md-2">
+            <input class="form-control" type="text" name="from" id="absentlistdatepickerfrom" required="">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <label>To</label>
+        </div>
+        <div class="col-md-2">
+            <input class="form-control" type="text" name="to" id="absentlistdatepickerto" required="">
+        </div>
+    </div>
+    <input class="btn btn-info" name="exportlatelist" type="submit" value="Export Date Wise Late List">
+    <input class="btn btn-info" name="attendancesummary" type="submit" value="Export Attendance Summary">
+
+</form>
+<hr />
+<form action="/Reports/Export3" method="POST">
+    <div class="row">
+        <div class="col-md-2">
+            <label>Employee</label>
+        </div>
+        <div class="col-md-4">
+            <select name="id" class="form-control" required="">
+                @foreach (var employee in employees)
+                {
+                    <option value="@employee.Id">@employee.Name, B: @employee.Branch.Name,
+                        D: @employee.Department.Name, S: @employee.Shift.Name
+                    </option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <label>From</label>
+        </div>
+        <div class="col-md-2">
+            <input class="form-control" type="text" name="from" id="absentlistdatepickerfromem" required="">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <label>To</label>
+        </div>
+        <div class="col-md-2">
+            <input class="form-control" type="text" name="to" id="absentlistdatepickertoem" required="">
+        </div>
+    </div>
+    <input class="btn btn-info" name="exployeeattendancelist" type="submit" value="Export Exployee Attendance Report">
+
+</form>

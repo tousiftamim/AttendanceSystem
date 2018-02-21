@@ -1,0 +1,25 @@
+﻿@model AttendanceSystem.Models.Shift
+
+@{
+    ViewBag.Title = "Shift Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Shift Details</h2>
+<br/>
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>Name</th>
+        <th>ExpectedEntryTime</th>
+        <th>Grace Entry Time</th>
+        <th>Expected Exit Time</th>
+    </tr>
+    <tr>
+        <td>@Model.Name</td>
+        <td>@Model.ExpectedEntryTime</td>
+        <td>@Model.GraceEntryTime</td>
+        <td>@Model.ExpectedExitTime</td>
+    </tr>
+</table>
+<a class="btn btn-info" href="/Shift/Index">Go Back</a>

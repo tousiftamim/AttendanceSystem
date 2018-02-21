@@ -1,0 +1,42 @@
+﻿@model AttendanceSystem.Models.Branch
+
+@using System.Web.Mvc.Html
+@using AttendanceSystem.Models
+
+@{
+    ViewBag.Title = "Branch Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Branch Edit</h2>
+<br />
+
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("Edit", "Branch"))
+        {
+            @Html.HiddenFor(model => model.Id)
+            
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Name</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="Name" required="" value="@Model.Name">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Full Address</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="FullAddress" value="@Model.FullAddress">
+                </div>
+            </div>
+            
+            <input class="btn btn-success" type="submit" value="Submit">
+    <a class="btn btn-info" href="/Branch/Index">Cancel</a>
+        }
+    </div>
+</div>
